@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="wmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0C14" />
+      <stop offset="100%" stop-color="#050408" />
+    </linearGradient>
+
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="50%" stop-color="#FFFFFF" />
+      <stop offset="78%" stop-color="#FF3366" />
+      <stop offset="100%" stop-color="#FF7A00" />
+    </linearGradient>
+
+    <linearGradient id="pillGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF0055" />
+      <stop offset="100%" stop-color="#7928CA" />
+    </linearGradient>
+
+    <linearGradient id="iconWave1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF0055" />
+      <stop offset="100%" stop-color="#FFAA00" />
+    </linearGradient>
+
+    <linearGradient id="iconWave2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7928CA" />
+      <stop offset="100%" stop-color="#FF007A" />
+    </linearGradient>
+
+    <linearGradient id="iconWave3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F5D4" />
+      <stop offset="100%" stop-color="#0077B6" />
+    </linearGradient>
+
+    <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="320" rx="24" fill="url(#wmBg)" />
+  <rect width="1200" height="320" rx="24" fill="none" stroke="#252131" stroke-width="2" />
+
+  <!-- ICON CONTAINER (Left) -->
+  <g transform="translate(60, 40)">
+    <!-- Base Icon Tile -->
+    <rect x="0" y="0" width="240" height="240" rx="56" fill="#15121E" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+
+    <!-- Ambient Glow -->
+    <circle cx="120" cy="120" r="50" fill="#FF0055" opacity="0.25" filter="url(#glowEffect)" />
+
+    <!-- Outer Wave -->
+    <path d="M 52 120 A 68 68 0 1 1 188 120 A 68 68 0 0 1 52 120"
+          fill="none" stroke="url(#iconWave3)" stroke-width="7" stroke-linecap="round" stroke-dasharray="160 90" opacity="0.6" />
+
+    <!-- Mid Wave -->
+    <path d="M 72 120 A 48 48 0 1 1 168 120 A 48 48 0 0 1 72 120"
+          fill="none" stroke="url(#iconWave2)" stroke-width="9" stroke-linecap="round" stroke-dasharray="120 60" opacity="0.85" />
+
+    <!-- Inner Wave -->
+    <path d="M 90 120 A 30 30 0 1 1 150 120 A 30 30 0 0 1 90 120"
+          fill="none" stroke="url(#iconWave1)" stroke-width="10" stroke-linecap="round" stroke-dasharray="80 30" filter="url(#glowEffect)" />
+
+    <!-- Core Play Emitter -->
+    <path d="M 112 105 C 112 103 114 102 116 103 L 136 117 C 138 118 138 122 136 123 L 116 137 C 114 138 112 137 112 135 Z"
+          fill="#FFFFFF" />
+  </g>
+
+  <!-- TYPOGRAPHY / WORDMARK (Right) -->
+  <g transform="translate(340, 145)">
+    <!-- Main Brand Name -->
+    <text x="0" y="0"
+          font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          font-size="82"
+          font-weight="800"
+          letter-spacing="-1.5"
+          fill="url(#textGrad)">Echo Music</text>
+
+    <!-- Commercial Tagline & Specs -->
+    <text x="4" y="52"
+          font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          font-size="20"
+          font-weight="600"
+          letter-spacing="5"
+          fill="#9E9AA8">AD-FREE MUSIC &amp; VIDEOS • LOSSLESS • DESKTOP</text>
+
+    <!-- Production Ready Pill Badges -->
+    <g transform="translate(4, 82)">
+      <!-- Windows Native Badge -->
+      <rect x="0" y="0" width="138" height="32" rx="16" fill="#1C1827" stroke="#342D45" stroke-width="1.5" />
+      <text x="14" y="21" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#00D4FF" letter-spacing="1">WINDOWS 11</text>
+
+      <!-- 100% Ad-Free Badge -->
+      <rect x="150" y="0" width="128" height="32" rx="16" fill="#2A121E" stroke="#5E233E" stroke-width="1.5" />
+      <text x="164" y="21" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FF3366" letter-spacing="1">100% AD-FREE</text>
+
+      <!-- 480p Video Mode Badge -->
+      <rect x="290" y="0" width="144" height="32" rx="16" fill="#1E1929" stroke="#413460" stroke-width="1.5" />
+      <text x="304" y="21" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#B388FF" letter-spacing="1">MUSIC VIDEOS</text>
+
+      <!-- Verified Engine Badge -->
+      <rect x="446" y="0" width="168" height="32" rx="16" fill="url(#pillGrad)" opacity="0.9" />
+      <text x="458" y="21" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="1">COMPOSE DESKTOP</text>
+    </g>
+  </g>
+</svg>

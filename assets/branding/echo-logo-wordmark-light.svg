@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="lightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F8F9FD" />
+    </linearGradient>
+
+    <linearGradient id="textGradLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0E0D13" />
+      <stop offset="50%" stop-color="#1A1824" />
+      <stop offset="78%" stop-color="#E60050" />
+      <stop offset="100%" stop-color="#FF5500" />
+    </linearGradient>
+
+    <linearGradient id="pillGradLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF0055" />
+      <stop offset="100%" stop-color="#7928CA" />
+    </linearGradient>
+
+    <linearGradient id="iconWaveLight1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF0055" />
+      <stop offset="100%" stop-color="#FF7700" />
+    </linearGradient>
+
+    <linearGradient id="iconWaveLight2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7928CA" />
+      <stop offset="100%" stop-color="#FF007A" />
+    </linearGradient>
+
+    <linearGradient id="iconWaveLight3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BAA4" />
+      <stop offset="100%" stop-color="#0077B6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="320" rx="24" fill="url(#lightBg)" />
+  <rect width="1200" height="320" rx="24" fill="none" stroke="#E6E8F0" stroke-width="2" />
+
+  <!-- ICON CONTAINER (Left) -->
+  <g transform="translate(60, 40)">
+    <!-- Base Icon Tile -->
+    <rect x="0" y="0" width="240" height="240" rx="56" fill="#F0F2FA" stroke="#DDE0ED" stroke-width="2" />
+
+    <!-- Outer Wave -->
+    <path d="M 52 120 A 68 68 0 1 1 188 120 A 68 68 0 0 1 52 120"
+          fill="none" stroke="url(#iconWaveLight3)" stroke-width="7" stroke-linecap="round" stroke-dasharray="160 90" opacity="0.75" />
+
+    <!-- Mid Wave -->
+    <path d="M 72 120 A 48 48 0 1 1 168 120 A 48 48 0 0 1 72 120"
+          fill="none" stroke="url(#iconWaveLight2)" stroke-width="9" stroke-linecap="round" stroke-dasharray="120 60" opacity="0.9" />
+
+    <!-- Inner Wave -->
+    <path d="M 90 120 A 30 30 0 1 1 150 120 A 30 30 0 0 1 90 120"
+          fill="none" stroke="url(#iconWaveLight1)" stroke-width="10" stroke-linecap="round" stroke-dasharray="80 30" />
+
+    <!-- Core Play Emitter -->
+    <path d="M 112 105 C 112 103 114 102 116 103 L 136 117 C 138 118 138 122 136 123 L 116 137 C 114 138 112 137 112 135 Z"
+          fill="#0E0D13" />
+  </g>
+
+  <!-- TYPOGRAPHY / WORDMARK (Right) -->
+  <g transform="translate(340, 145)">
+    <!-- Main Brand Name -->
+    <text x="0" y="0"
+          font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          font-size="82"
+          font-weight="800"
+          letter-spacing="-1.5"
+          fill="url(#textGradLight)">Echo Music</text>
+
+    <!-- Commercial Tagline & Specs -->
+    <text x="4" y="52"
+          font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          font-size="20"
+          font-weight="700"
+          letter-spacing="5"
+          fill="#636070">AD-FREE MUSIC &amp; VIDEOS • LOSSLESS • DESKTOP</text>
+
+    <!-- Production Ready Pill Badges -->
+    <g transform="translate(4, 82)">
+      <!-- Windows Native Badge -->
+      <rect x="0" y="0" width="138" height="32" rx="16" fill="#E8F4FD" stroke="#B8DCF9" stroke-width="1.5" />
+      <text x="14" y="21" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#0077CC" letter-spacing="1">WINDOWS 11</text>
+
+      <!-- 100% Ad-Free Badge -->
+      <rect x="150" y="0" width="128" height="32" rx="16" fill="#FDEEF3" stroke="#F8B8CE" stroke-width="1.5" />
+      <text x="164" y="21" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#D60045" letter-spacing="1">100% AD-FREE</text>
+
+      <!-- 480p Video Mode Badge -->
+      <rect x="290" y="0" width="144" height="32" rx="16" fill="#F3EEFA" stroke="#D3BEEF" stroke-width="1.5" />
+      <text x="304" y="21" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#6A22B8" letter-spacing="1">MUSIC VIDEOS</text>
+
+      <!-- Verified Engine Badge -->
+      <rect x="446" y="0" width="168" height="32" rx="16" fill="url(#pillGradLight)" />
+      <text x="458" y="21" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="1">COMPOSE DESKTOP</text>
+    </g>
+  </g>
+</svg>

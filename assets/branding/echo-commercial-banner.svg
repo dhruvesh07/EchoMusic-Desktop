@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="100%" height="100%">
+  <defs>
+    <!-- Background Canvas Gradients -->
+    <radialGradient id="heroGlow" cx="75%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#3A1535" stop-opacity="0.8" />
+      <stop offset="45%" stop-color="#140D1D" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#08060B" />
+    </radialGradient>
+
+    <linearGradient id="neonPinkOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF0055" />
+      <stop offset="50%" stop-color="#FF5500" />
+      <stop offset="100%" stop-color="#FFAA00" />
+    </linearGradient>
+
+    <linearGradient id="neonPurplePink" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7928CA" />
+      <stop offset="50%" stop-color="#FF007A" />
+      <stop offset="100%" stop-color="#FF3366" />
+    </linearGradient>
+
+    <linearGradient id="cyanBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F5D4" />
+      <stop offset="100%" stop-color="#0099FF" />
+    </linearGradient>
+
+    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF0055" />
+      <stop offset="100%" stop-color="#FF5500" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="ultraGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="40" result="blur" />
+    </filter>
+
+    <filter id="tileShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="32" flood-color="#000000" flood-opacity="0.8" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1280" height="720" fill="url(#heroGlow)" />
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="960" cy="360" r="240" fill="#FF0055" opacity="0.22" filter="url(#ultraGlow)" />
+  <circle cx="820" cy="240" r="180" fill="#7928CA" opacity="0.28" filter="url(#ultraGlow)" />
+  <circle cx="1100" cy="480" r="160" fill="#00D4FF" opacity="0.15" filter="url(#ultraGlow)" />
+
+  <!-- Subtle Studio Grid Pattern -->
+  <g opacity="0.04" stroke="#FFFFFF" stroke-width="1">
+    <line x1="80" y1="0" x2="80" y2="720" />
+    <line x1="240" y1="0" x2="240" y2="720" />
+    <line x1="400" y1="0" x2="400" y2="720" />
+    <line x1="560" y1="0" x2="560" y2="720" />
+    <line x1="720" y1="0" x2="720" y2="720" />
+    <line x1="880" y1="0" x2="880" y2="720" />
+    <line x1="1040" y1="0" x2="1040" y2="720" />
+    <line x1="1200" y1="0" x2="1200" y2="720" />
+    <line x1="0" y1="120" x2="1280" y2="120" />
+    <line x1="0" y1="280" x2="1280" y2="280" />
+    <line x1="0" y1="440" x2="1280" y2="440" />
+    <line x1="0" y1="600" x2="1280" y2="600" />
+  </g>
+
+  <!-- LEFT HERO SECTION: Commercial Copy -->
+  <g transform="translate(100, 160)">
+    <!-- Top Pill Announcement -->
+    <g>
+      <rect x="0" y="0" width="220" height="36" rx="18" fill="#1E1728" stroke="#3D3050" stroke-width="1.5" />
+      <circle cx="18" cy="18" r="5" fill="#00F5D4" />
+      <text x="32" y="23" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="1.5">WINDOWS DESKTOP</text>
+    </g>
+
+    <!-- Main Commercial Title -->
+    <text x="0" y="96" font-family="system-ui, sans-serif" font-size="64" font-weight="900" fill="#FFFFFF" letter-spacing="-2">
+      Echo Music
+    </text>
+
+    <!-- Subtitle Line -->
+    <text x="0" y="152" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="url(#neonPinkOrange)" letter-spacing="-0.5">
+      The Ad-Free YouTube Music Client.
+    </text>
+
+    <!-- Paragraph Description -->
+    <text x="0" y="202" font-family="system-ui, sans-serif" font-size="17" font-weight="400" fill="#A8A4B4" line-height="28">
+      <tspan x="0" dy="0">High-fidelity audio streaming paired with synced 16:9 music video</tspan>
+      <tspan x="0" dy="28">theater mode, smart recommendations, and seamless local playlists.</tspan>
+    </text>
+
+    <!-- Commercial Feature Checkmarks -->
+    <g transform="translate(0, 270)">
+      <g transform="translate(0, 0)">
+        <circle cx="10" cy="10" r="10" fill="#1C2E24" />
+        <path d="M 6 10 L 9 13 L 14 7" stroke="#00F5D4" stroke-width="2.5" fill="none" stroke-linecap="round" />
+        <text x="28" y="15" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">100% Ad-Free Audio &amp; Video</text>
+      </g>
+      <g transform="translate(260, 0)">
+        <circle cx="10" cy="10" r="10" fill="#2E1C28" />
+        <path d="M 6 10 L 9 13 L 14 7" stroke="#FF007A" stroke-width="2.5" fill="none" stroke-linecap="round" />
+        <text x="28" y="15" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF">Official Song/Video Switcher</text>
+      </g>
+    </g>
+
+    <!-- CTA Button Mock -->
+    <g transform="translate(0, 330)">
+      <rect x="0" y="0" width="230" height="54" rx="27" fill="url(#btnGrad)" />
+      <text x="36" y="34" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">LAUNCH ECHO MUSIC</text>
+    </g>
+  </g>
+
+  <!-- RIGHT HERO SECTION: 3D Showcase App Icon -->
+  <g transform="translate(800, 160)" filter="url(#tileShadow)">
+    <!-- Main Glass Tile -->
+    <rect x="0" y="0" width="380" height="380" rx="90" fill="#15111D" stroke="rgba(255,255,255,0.12)" stroke-width="3" />
+
+    <!-- Inner Ambient Glow -->
+    <circle cx="190" cy="190" r="110" fill="#FF0055" opacity="0.3" filter="url(#ultraGlow)" />
+    <circle cx="190" cy="190" r="70" fill="#7928CA" opacity="0.35" filter="url(#ultraGlow)" />
+
+    <!-- Echo Outer Soundwave Arc -->
+    <path d="M 80 190 A 110 110 0 1 1 300 190 A 110 110 0 0 1 80 190"
+          fill="none" stroke="url(#cyanBlue)" stroke-width="11" stroke-linecap="round" stroke-dasharray="260 140" opacity="0.65" />
+
+    <!-- Echo Mid Soundwave Arc -->
+    <path d="M 112 190 A 78 78 0 1 1 268 190 A 78 78 0 0 1 112 190"
+          fill="none" stroke="url(#neonPurplePink)" stroke-width="14" stroke-linecap="round" stroke-dasharray="200 90" opacity="0.85" />
+
+    <!-- Echo Inner Soundwave Arc -->
+    <path d="M 142 190 A 48 48 0 1 1 238 190 A 48 48 0 0 1 142 190"
+          fill="none" stroke="url(#neonPinkOrange)" stroke-width="16" stroke-linecap="round" stroke-dasharray="130 50" />
+
+    <!-- Playhead Core -->
+    <path d="M 178 165 C 178 162 181 160 184 162 L 216 182 C 219 184 219 188 216 190 L 184 210 C 181 212 178 210 178 207 Z"
+          fill="#FFFFFF" />
+  </g>
+</svg>
