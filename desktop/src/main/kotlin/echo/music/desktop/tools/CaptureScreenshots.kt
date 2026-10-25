@@ -102,13 +102,14 @@ fun main() = application {
     Playback.setQueueForDisplay(sampleSongs, currentIndex = 0, isPlaying = true, positionMs = 74000L)
 
     var stage by remember { mutableStateOf(0) }
-    val windowState = rememberWindowState(width = 1280.dp, height = 720.dp)
+    val windowState = rememberWindowState(width = 1260.dp, height = 700.dp)
 
     Window(
         onCloseRequest = ::exitApplication,
         title = "Echo Music",
         icon = painterResource("icon.png"),
         state = windowState,
+        alwaysOnTop = true,
     ) {
         val window = this.window
 
@@ -157,11 +158,18 @@ fun main() = application {
         }
 
         LaunchedEffect(Unit) {
+            window.isAlwaysOnTop = true
+            window.toFront()
+            window.requestFocus()
+
             val outDir = File("Screenshots")
             if (!outDir.exists()) outDir.mkdirs()
             val robot = Robot()
 
             fun capture(fileName: String) {
+                window.toFront()
+                window.requestFocus()
+                Thread.sleep(300)
                 val loc = window.locationOnScreen
                 val insets = window.insets
                 val x = loc.x + insets.left
@@ -177,37 +185,37 @@ fun main() = application {
 
             // 0: HOME
             println("Waiting for Home screen...")
-            delay(5500)
+            delay(6500)
             capture("Home.png")
 
             // 1: FULL PLAYER - SONG
             stage = 1
             println("Waiting for Player (Song mode)...")
-            delay(3500)
+            delay(4000)
             capture("Player_Song.png")
 
             // 2: FULL PLAYER - VIDEO
             stage = 2
             println("Waiting for Player (Video mode)...")
-            delay(3000)
+            delay(3500)
             capture("Player_Video.png")
 
             // 3: QUEUE
             stage = 3
             println("Waiting for Player (Queue)...")
-            delay(2500)
+            delay(3000)
             capture("Queue.png")
 
             // 4: SEARCH
             stage = 4
             println("Waiting for Search screen...")
-            delay(4000)
+            delay(5000)
             capture("Search.png")
 
             // 5: LIBRARY
             stage = 5
             println("Waiting for Library screen...")
-            delay(3000)
+            delay(3500)
             capture("Library.png")
 
             println("ALL 6 SCREENSHOTS CAPTURED SUCCESSFULLY!")

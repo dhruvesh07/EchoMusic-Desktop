@@ -56,8 +56,8 @@ fun SearchScreen(
     initialQuery: String = "",
     initialFilter: DesktopSearchFilter = DesktopSearchFilter.SONGS,
 ) {
-    var query by remember { mutableStateOf(initialQuery) }
-    var filter by remember { mutableStateOf(initialFilter) }
+    var query by remember(initialQuery) { mutableStateOf(initialQuery) }
+    var filter by remember(initialFilter) { mutableStateOf(initialFilter) }
     // ⋮ on a song result → the add-to-playlist picker for that track.
     var addToPlaylistSong by remember { mutableStateOf<SongItem?>(null) }
 

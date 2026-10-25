@@ -95,14 +95,14 @@ fun FullPlayer(
     val state by Playback.state.collectAsState()
     val song = state.current ?: return
     val colors = MaterialTheme.colorScheme
-    var showQueue by remember { mutableStateOf(initialShowQueue) }
+    var showQueue by remember(initialShowQueue) { mutableStateOf(initialShowQueue) }
 
     // Persistent video mode preference across songs during this session.
     // Song mode: 1:1 square album art, pure lossless audio.
     // Video mode: 16:9 widescreen YouTube Music theater presentation with cinematic poster,
     // "Music Video" indicator, and 1-click official YouTube video link. Live video frame decoding
     // is disabled to ensure 0% CPU overhead, zero frame drift, and 100% audio playback stability.
-    var videoMode by remember { mutableStateOf(initialVideoMode) }
+    var videoMode by remember(initialVideoMode) { mutableStateOf(initialVideoMode) }
 
     LaunchedEffect(Unit) {
         VideoEngine.stop()

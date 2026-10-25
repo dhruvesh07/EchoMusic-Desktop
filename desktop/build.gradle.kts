@@ -76,6 +76,8 @@ compose.desktop {
             vendor = "Echo Music"
             windows {
                 iconFile.set(project.file("src/main/resources/icon.ico"))
+                shortcut = true
+                menu = true
                 menuGroup = "Echo Music"
                 upgradeUuid = "8f3a1c2e-4b7d-4a9f-9c6e-1d2f3a4b5c6d"
             }
