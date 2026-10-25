@@ -26,31 +26,31 @@ Built from the ground up for desktop listening, it features:
     <tr>
       <td align="center" style="padding: 15px; border: none;">
         <b>Home Screen</b><br><br>
-        <img src="Screenshots/Home.png" alt="Home Screen" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
+        <img src="Screenshots/desktop_home.png" alt="Home Screen" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
       </td>
       <td align="center" style="padding: 15px; border: none;">
         <b>Full Player (Song Mode)</b><br><br>
-        <img src="Screenshots/Player_Song.png" alt="Full Player (Song Mode)" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
+        <img src="Screenshots/desktop_player_song.png" alt="Full Player (Song Mode)" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
       </td>
     </tr>
     <tr>
       <td align="center" style="padding: 15px; border: none;">
         <b>16:9 Theater Mode (Video)</b><br><br>
-        <img src="Screenshots/Player_Video.png" alt="16:9 Theater Mode" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
+        <img src="Screenshots/desktop_player_video.png" alt="16:9 Theater Mode" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
       </td>
       <td align="center" style="padding: 15px; border: none;">
         <b>Playback Queue</b><br><br>
-        <img src="Screenshots/Queue.png" alt="Playback Queue" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
+        <img src="Screenshots/desktop_queue.png" alt="Playback Queue" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
       </td>
     </tr>
     <tr>
       <td align="center" style="padding: 15px; border: none;">
         <b>Search & Explore</b><br><br>
-        <img src="Screenshots/Search.png" alt="Search & Explore" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
+        <img src="Screenshots/desktop_search.png" alt="Search & Explore" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
       </td>
       <td align="center" style="padding: 15px; border: none;">
         <b>Music Library & Playlists</b><br><br>
-        <img src="Screenshots/Library.png" alt="Music Library" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
+        <img src="Screenshots/desktop_library.png" alt="Music Library" width="380" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
       </td>
     </tr>
   </table>
