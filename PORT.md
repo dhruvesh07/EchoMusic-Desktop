@@ -124,7 +124,8 @@ Format selection mirrors upstream `YTPlayerUtils.findFormat`: audio-only, not au
 
 ### 6.2 Audio engine — `playback/FfmpegPlayer.kt` + `playback/Playback.kt`
 
-`ffmpeg` (already on this machine via scoop) decodes adaptive audio (opus/AAC — neither is
+`ffmpeg` (see `BUILD.md` for installation; lookups are documented in
+`FfmpegPlayer.findFfmpeg`) decodes adaptive audio (opus/AAC — neither is
 JVM-decodable) to PCM:
 
 ```
@@ -280,15 +281,14 @@ All four upstream TTFs ship in `desktop/src/main/resources/fonts/` and load via
 
 ```powershell
 cd EchoMusic-Desktop
-.\gradlew.bat -g C:\Users\dhruv\Downloads\gradle-home :desktop:run   # launch the app
-.\gradlew.bat -g C:\Users\dhruv\Downloads\gradle-home :desktop:createDistributable  # MSI/EXE
+.\gradlew.bat :desktop:run                  # launch the app
+.\gradlew.bat :desktop:packageMsi           # build the MSI installer
+.\gradlew.bat :desktop:packagePortableZip   # build the portable ZIP
 ```
 
-**Why `-g`:** this machine sets `GRADLE_USER_HOME` to
-`C:\Users\dhruv\scoop\apps\gradle\current\.gradle`, which accumulated a stale
-Kotlin-DSL compilation of `settings.gradle.kts` (surfaced as
-`NoSuchMethodError: Settings_gradle.<init>`). The `-g` flag points Gradle at a clean user home.
-The poisoned caches under that directory have also been deleted as of this session.
+If Gradle reports a Kotlin-DSL `NoSuchMethodError` from a stale cache, point it
+at a clean user home for one build (`-g C:\path\to\clean-gradle-home`). `BUILD.md`
+documents the supported toolchain.
 
 Toolchain: the upstream modules target JVM 21, but only JDK 17 is installed, so all shims use
 `jvmToolchain(17)` — none of the reused code depends on Java 21 APIs.

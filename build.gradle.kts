@@ -6,5 +6,5 @@ plugins {
 
 allprojects {
     group = "fun.echomusic.desktop"
-    version = "1.4.4"
+    version = "1.4.5"
 }

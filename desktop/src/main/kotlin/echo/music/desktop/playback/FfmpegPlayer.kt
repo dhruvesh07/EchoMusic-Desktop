@@ -10,7 +10,7 @@ import javax.sound.sampled.SourceDataLine
 import kotlin.concurrent.thread
 
 /**
- * Audio playback engine backed by the system `ffmpeg` binary (already on this machine via scoop).
+ * Audio playback engine backed by the system `ffmpeg` binary (see [findFfmpeg] for lookup order).
  *
  * Why ffmpeg: YouTube serves adaptive audio as webm/opus (itag 251) or m4a/AAC (itag 140).
  * Neither `javax.sound.sampled` nor the JVM decodes those natively, and shipping a decoder
@@ -73,7 +73,7 @@ class FfmpegPlayer(
         stopInternal(keepLine = false) // …then tear the old pipeline down
 
         val ffmpeg = findFfmpeg() ?: run {
-            onFailed("ffmpeg not found — audio playback is unavailable")
+            onFailed(missingFfmpegMessage())
             return
         }
         seekBaseMs = startMs
@@ -321,29 +321,55 @@ class FfmpegPlayer(
 
         private var cachedFfmpeg: String? = null
 
-        /** Resolve ffmpeg once: FFMPEG_HOME → PATH → the scoop shim this machine ships. */
+        /**
+         * Resolve ffmpeg once, in order:
+         *  1. `ECHO_FFMPEG` — full path to the binary (explicit override)
+         *  2. `FFMPEG_HOME/bin/ffmpeg[.exe]` and `FFMPEG_HOME/ffmpeg[.exe]`
+         *  3. Next to the installed app / app image (jpackage sets `jpackage.app-path`)
+         *  4. Every directory on `PATH`
+         *
+         * There is deliberately no machine-specific fallback: the old code pointed at one
+         * developer's scoop shim, so it worked there and failed on every user machine.
+         */
         fun findFfmpeg(): String? {
             cachedFfmpeg?.let { return it }
-            val candidates = mutableListOf<String>()
-            System.getenv("FFMPEG_HOME")?.let { candidates += File(it, "bin/ffmpeg.exe").path }
-            System.getenv("PATH")
-                ?.split(File.pathSeparator)
-                ?.orEmpty()
-                ?.forEach { dir ->
-                    candidates += File(dir, "ffmpeg.exe").path
-                    candidates += File(dir, "ffmpeg").path
+            val exe =
+                if (System.getProperty("os.name").startsWith("Windows", ignoreCase = true)) {
+                    "ffmpeg.exe"
+                } else {
+                    "ffmpeg"
                 }
-            candidates += """C:\Users\dhruv\scoop\shims\ffmpeg.exe"""
+            val appDir =
+                System.getProperty("jpackage.app-path")
+                    ?.let { File(it).parentFile }
+                    ?: File(System.getProperty("user.dir", "."))
+
+            val candidates =
+                buildList {
+                    System.getenv("ECHO_FFMPEG")?.takeIf { it.isNotBlank() }?.let { add(it) }
+                    System.getenv("FFMPEG_HOME")?.takeIf { it.isNotBlank() }?.let {
+                        add(File(it, "bin/$exe").path)
+                        add(File(it, exe).path)
+                    }
+                    add(File(appDir, exe).path)
+                    add(File(appDir, "ffmpeg/$exe").path)
+                    System.getenv("PATH")
+                        ?.split(File.pathSeparator)
+                        ?.filter { it.isNotBlank() }
+                        ?.forEach { add(File(it, exe).path) }
+                }
+
             val found =
-                candidates.firstOrNull { p ->
-                    val f = File(p)
-                    f.isAbsolute && f.exists()
-                } ?: runCatching {
-                    // scoop shims live on PATH; ask the shell as a last resort
-                    val proc = ProcessBuilder("where.exe", "ffmpeg").start()
-                    proc.inputStream.bufferedReader().readLine()?.trim()?.takeIf { it.isNotEmpty() }
-                }.getOrNull()
+                candidates.firstOrNull { path ->
+                    val file = File(path)
+                    file.isAbsolute && file.isFile
+                }
             return found?.also { cachedFfmpeg = it }
         }
+
+        /** Actionable message shown in the UI when audio/video cannot start. */
+        fun missingFfmpegMessage(): String =
+            "ffmpeg not found. Install ffmpeg and add it to PATH, or set ECHO_FFMPEG " +
+                "to the full path of ffmpeg.exe."
     }
 }

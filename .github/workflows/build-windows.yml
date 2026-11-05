@@ -1,0 +1,146 @@
+name: Build Windows release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  windows-x64:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    env:
+      WINDOWS_CERT_PFX_BASE64: ${{ secrets.WINDOWS_CERT_PFX_BASE64 }}
+      WINDOWS_CERT_PASSWORD: ${{ secrets.WINDOWS_CERT_PASSWORD }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Ensure WiX Toolset 3.14
+        shell: pwsh
+        run: |
+          $candle = "${env:ProgramFiles(x86)}\WiX Toolset v3.14\bin\candle.exe"
+          if (-not (Test-Path $candle)) {
+            choco install wixtoolset -y --no-progress
+          }
+          if (-not (Test-Path $candle)) {
+            throw "WiX Toolset 3.14 is required (candle.exe not found)."
+          }
+          Write-Host "Using $candle"
+          "${env:ProgramFiles(x86)}\WiX Toolset v3.14\bin" |
+            Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Run unit tests
+        shell: pwsh
+        run: |
+          .\gradlew.bat --no-daemon --console=plain `
+            :domain:test :metadata:test
+
+      - name: Build MSI and portable ZIP
+        shell: pwsh
+        run: |
+          .\gradlew.bat --no-daemon --console=plain `
+            :desktop:packageMsi :desktop:packagePortableZip
+
+      - name: Sign MSI (optional)
+        if: env.WINDOWS_CERT_PFX_BASE64 != ''
+        shell: pwsh
+        run: |
+          $pfx = Join-Path $env:RUNNER_TEMP "codesign.pfx"
+          [IO.File]::WriteAllBytes(
+            $pfx,
+            [Convert]::FromBase64String($env:WINDOWS_CERT_PFX_BASE64)
+          )
+          try {
+            .\scripts\sign-release.ps1 `
+              -CertificatePath $pfx `
+              -CertificatePassword $env:WINDOWS_CERT_PASSWORD
+          }
+          finally {
+            Remove-Item $pfx -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Collect artifacts and checksums
+        shell: pwsh
+        run: |
+          $version = (Select-String -Path build.gradle.kts -Pattern 'version = "([^"]+)"').Matches[0].Groups[1].Value
+          if ($env:GITHUB_REF_TYPE -eq "tag" -and $env:GITHUB_REF_NAME -ne "v$version") {
+            throw "Tag $env:GITHUB_REF_NAME does not match project version $version"
+          }
+
+          $dist = "desktop/build/dist"
+          New-Item -ItemType Directory -Force -Path $dist | Out-Null
+
+          $msi = Get-ChildItem "desktop/build/compose/binaries/main/msi" -Filter "*.msi" |
+            Select-Object -First 1
+          if (-not $msi) { throw "MSI was not produced." }
+
+          Copy-Item $msi.FullName `
+            (Join-Path $dist "Echo-Music-Windows-x64-v$version.msi") -Force
+
+          $artifacts = @()
+          $artifacts += Get-ChildItem $dist -Filter "*.msi"
+          $artifacts += Get-ChildItem $dist -Filter "*.zip"
+          if ($artifacts.Count -ne 2) {
+            throw "Expected one MSI and one ZIP, found $($artifacts.Count)."
+          }
+
+          $lines = foreach ($f in $artifacts) {
+            "{0}  {1}" -f (Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLowerInvariant(), $f.Name
+          }
+          $lines | Set-Content (Join-Path $dist "SHA256SUMS.txt") -Encoding ascii
+          Get-Content (Join-Path $dist "SHA256SUMS.txt")
+
+          "ECHO_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: echo-music-windows-x64
+          path: desktop/build/dist/*
+          if-no-files-found: error
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            desktop/build/dist/*.msi
+            desktop/build/dist/*.zip
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          $dist = "desktop/build/dist"
+          $assets = @(Get-ChildItem $dist -File | ForEach-Object FullName)
+
+          gh release view $tag --json tagName 2>$null | Out-Null
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload $tag $assets --clobber
+            gh release edit $tag --notes-file docs/release-notes.md
+          }
+          else {
+            gh release create $tag $assets `
+              --title "Echo Music Desktop $tag (Windows)" `
+              --notes-file docs/release-notes.md
+          }

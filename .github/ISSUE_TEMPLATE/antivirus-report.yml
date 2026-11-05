@@ -1,0 +1,81 @@
+name: Antivirus / SmartScreen report
+description: Report a heuristic or machine-learning detection so it can be verified and submitted to the vendor.
+title: "[AV] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for checking before running the app. Generic heuristic and ML
+        verdicts are common for unsigned installers. Please include the exact
+        filename and SHA-256 so the build can be identified.
+
+        **Do not** disable real-time protection or add a blanket exclusion.
+
+  - type: dropdown
+    id: vendor
+    attributes:
+      label: Security vendor
+      options:
+        - Gridinsoft
+        - Trapmine
+        - Microsoft Defender / SmartScreen
+        - Other (fill in below)
+    validations:
+      required: true
+
+  - type: input
+    id: detection
+    attributes:
+      label: Detection name
+      placeholder: "e.g. Trojan.Heur.02012123"
+    validations:
+      required: true
+
+  - type: input
+    id: filename
+    attributes:
+      label: Exact filename
+      placeholder: "e.g. Echo-Music-Windows-x64-v1.4.5.msi"
+    validations:
+      required: true
+
+  - type: input
+    id: sha256
+    attributes:
+      label: SHA-256
+      description: From `Get-FileHash <file> -Algorithm SHA256` or the VirusTotal details page.
+      placeholder: "64 hexadecimal characters"
+    validations:
+      required: true
+
+  - type: input
+    id: virustotal
+    attributes:
+      label: VirusTotal link (optional)
+      placeholder: "https://www.virustotal.com/gui/file/..."
+
+  - type: input
+    id: source
+    attributes:
+      label: Where did you download it?
+      placeholder: "GitHub release URL"
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Scanner output and context
+      description: Vendor version, full path, status (quarantined/blocked), and any screenshot text.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I verified the SHA-256 against the release's SHA256SUMS.txt.
+          required: true
+        - label: I am reporting the exact file, not a repack or third-party mirror.
+          required: true

@@ -71,9 +71,60 @@ Built from the ground up for desktop listening, it features:
 
 ## Download
 
-Get the standalone Windows installer package (.exe):
+Windows 10 / 11 x64.
 
-[![Download for Windows](https://img.shields.io/badge/Download-Echo%20Music%20Desktop%20v1.4.4-00E5FF?style=for-the-badge&logo=windows&logoColor=black)](https://github.com/dhruvesh07/EchoMusic-Desktop/releases/download/v1.4.4/Echo-Music-Windows-x64-v1.4.4.exe)
+| Package | Use it if |
+|---|---|
+| [**Echo Music v1.4.5 — MSI**](https://github.com/dhruvesh07/EchoMusic-Desktop/releases/download/v1.4.5/Echo-Music-Windows-x64-v1.4.5.msi) | You want a normal per-user install (no admin prompt). |
+| [**Echo Music v1.4.5 — Portable ZIP**](https://github.com/dhruvesh07/EchoMusic-Desktop/releases/download/v1.4.5/Echo-Music-Windows-x64-v1.4.5-portable.zip) | You do not want to run an installer. Unzip and launch `Echo Music.exe`. |
+| [All releases](https://github.com/dhruvesh07/EchoMusic-Desktop/releases) | Older builds and checksums. |
 
-> **Direct Download Link:**  
-> [Echo-Music-Windows-x64-v1.4.4.exe](https://github.com/dhruvesh07/EchoMusic-Desktop/releases/download/v1.4.4/Echo-Music-Windows-x64-v1.4.4.exe)
+Both artifacts are built from the tagged source by GitHub Actions and receive a
+build-provenance attestation. Verify before running:
+
+```powershell
+Get-FileHash .\Echo-Music-Windows-x64-v1.4.5.msi -Algorithm SHA256
+Get-Content .\SHA256SUMS.txt
+
+gh attestation verify .\Echo-Music-Windows-x64-v1.4.5.msi `
+  --repo dhruvesh07/EchoMusic-Desktop
+```
+
+### A note about antivirus warnings
+
+Echo Music is currently **unsigned**. Unsigned JVM/installer builds are
+regularly flagged by heuristic and ML engines. The v1.4.4 report (Gridinsoft
+`Trojan.Heur.02012123`, Trapmine `Malicious.moderate.ml.score`) was generic
+heuristic/ML, not a signature match; Microsoft Defender found no threats, and
+the payload contained no bundled third-party executables.
+
+v1.4.5 removes the self-extracting EXE wrapper and ships a plain MSI. It also
+includes `SHA256SUMS.txt` and a GitHub build attestation. A code-signing
+certificate is the permanent fix and is the next step.
+
+See **[SECURITY.md](SECURITY.md)** for the full analysis and verification
+steps. If a scanner still flags the app, use the portable ZIP, verify the hash,
+or **[build it yourself](BUILD.md)**.
+
+### Requirements
+
+- **ffmpeg** on `PATH`, or `ECHO_FFMPEG` pointing at `ffmpeg.exe`. Audio and
+  video decoding use ffmpeg. It is not bundled, because shipping a third-party
+  `ffmpeg.exe` is itself a common antivirus false-positive trigger.
+
+---
+
+## Build from source
+
+See [BUILD.md](BUILD.md) for prerequisites (JDK 17, WiX 3.14, ffmpeg) and
+release packaging. Quick start:
+
+```powershell
+.\gradlew.bat :desktop:run
+```
+
+## License
+
+GNU General Public License v3.0. This is a desktop port of
+[Echo Music](https://github.com/EchoMusicApp/Echo-Music), also GPL-3.0.
+See [LICENSE](LICENSE).

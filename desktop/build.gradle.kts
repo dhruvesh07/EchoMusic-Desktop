@@ -62,20 +62,40 @@ tasks.register<JavaExec>("captureScreenshots") {
     mainClass = "echo.music.desktop.tools.CaptureScreenshotsKt"
 }
 
+// Portable, installer-free distribution: gradlew :desktop:packagePortableZip
+tasks.register<Zip>("packagePortableZip") {
+    group = "compose desktop"
+    description = "Zips the self-contained app image for users who do not want an installer."
+    dependsOn("createDistributable")
+    from(layout.buildDirectory.dir("compose/binaries/main/app"))
+    archiveFileName.set("Echo-Music-Windows-x64-v${project.version}-portable.zip")
+    destinationDirectory.set(layout.buildDirectory.dir("dist"))
+}
+
 compose.desktop {
     application {
         mainClass = "echo.music.desktop.MainKt"
         nativeDistributions {
+            // MSI only. The EXE target produced a self-extracting WiX "msiwrapper"
+            // stub (small PE + ~90 MB embedded MSI), which is a known heuristic and
+            // ML false-positive trigger. An MSI is installed by the trusted Windows
+            // Installer service and has no such wrapper.
             targetFormats(
                 org.jetbrains.compose.desktop.application.dsl.TargetFormat.Msi,
-                org.jetbrains.compose.desktop.application.dsl.TargetFormat.Exe,
             )
             packageName = "Echo Music"
-            packageVersion = "1.4.4"
+            packageVersion = project.version.toString()
             description = "Echo Music — ad-free YouTube Music client"
             vendor = "Echo Music"
+            copyright = "Copyright © 2026 Echo Music"
+            licenseFile.set(rootProject.layout.projectDirectory.file("LICENSE"))
             windows {
                 iconFile.set(project.file("src/main/resources/icon.ico"))
+                // Per-user install: no administrator elevation and no machine-wide
+                // changes, which also keeps the installer's behaviour unremarkable
+                // to security tooling.
+                perUserInstall = true
+                dirChooser = true
                 shortcut = true
                 menu = true
                 menuGroup = "Echo Music"

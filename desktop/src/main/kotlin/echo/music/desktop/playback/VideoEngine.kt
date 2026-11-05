@@ -89,7 +89,7 @@ object VideoEngine {
         stopInternal() // guard against a double start leaking the previous decoder
 
         val ffmpeg = FfmpegPlayer.findFfmpeg() ?: run {
-            _error.value = "ffmpeg not found — video playback is unavailable"
+            _error.value = FfmpegPlayer.missingFfmpegMessage()
             return
         }
         val (width, height) = outputSize(resolved)

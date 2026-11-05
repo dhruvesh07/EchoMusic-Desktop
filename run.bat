@@ -1,8 +1,10 @@
 @echo off
-cd /d "C:\Users\dhruv\Downloads\EchoMusic-Desktop"
+setlocal
+cd /d "%~dp0"
 echo Starting Echo Music Desktop...
-call gradlew.bat -g C:\Users\dhruv\Downloads\gradle-home :desktop:run
+call gradlew.bat :desktop:run
 if %ERRORLEVEL% NEQ 0 (
-    echo Error launching app!
+    echo.
+    echo Build failed. See BUILD.md for prerequisites.
     pause
 )

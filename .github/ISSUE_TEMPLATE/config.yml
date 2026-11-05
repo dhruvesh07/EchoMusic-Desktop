@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/dhruvesh07/EchoMusic-Desktop/security/advisories/new
+    about: Report security vulnerabilities privately, not in a public issue.
+  - name: Build and verification instructions
+    url: https://github.com/dhruvesh07/EchoMusic-Desktop/blob/main/BUILD.md
+    about: Build from source or verify a release artifact yourself.
