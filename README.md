@@ -75,7 +75,7 @@ Windows 10 / 11 x64.
 
 | Package | Use it if |
 |---|---|
-| [**Echo Music v1.4.5 — MSI**](https://github.com/dhruvesh07/EchoMusic-Desktop/releases/download/v1.4.5/Echo-Music-Windows-x64-v1.4.5.msi) | You want a normal per-user install (no admin prompt). |
+| [**Echo Music v1.4.5 — MSI**](https://github.com/dhruvesh07/EchoMusic-Desktop/releases/download/v1.4.5/Echo-Music-Windows-x64-v1.4.5.msi) | You want a normal Windows install (administrator approval required). |
 | [**Echo Music v1.4.5 — Portable ZIP**](https://github.com/dhruvesh07/EchoMusic-Desktop/releases/download/v1.4.5/Echo-Music-Windows-x64-v1.4.5-portable.zip) | You do not want to run an installer. Unzip and launch `Echo Music.exe`. |
 | [All releases](https://github.com/dhruvesh07/EchoMusic-Desktop/releases) | Older builds and checksums. |
 

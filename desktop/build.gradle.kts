@@ -91,10 +91,11 @@ compose.desktop {
             licenseFile.set(rootProject.layout.projectDirectory.file("LICENSE"))
             windows {
                 iconFile.set(project.file("src/main/resources/icon.ico"))
-                // Per-user install: no administrator elevation and no machine-wide
-                // changes, which also keeps the installer's behaviour unremarkable
-                // to security tooling.
-                perUserInstall = true
+                // Keep the machine-wide install scope used by v1.4.4. Windows
+                // Installer refuses cross-scope major upgrades, so a per-user
+                // package would install side-by-side with the old version
+                // instead of replacing it.
+                perUserInstall = false
                 dirChooser = true
                 shortcut = true
                 menu = true

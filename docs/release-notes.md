@@ -8,8 +8,9 @@ Security-hardening release in response to the VirusTotal report on v1.4.4.
   `msiwrapper` stub with a ~91 MB embedded MSI — a shape heuristic and ML
   scanners often flag. The MSI is installed by the trusted Windows Installer
   service, with no wrapper.
-- **Per-user installation.** No administrator elevation and no machine-wide
-  changes.
+- **Standard machine-wide installation.** Installs to `Program Files` with the
+  same scope as v1.4.4, so the new MSI replaces the old version in place. No
+  service, driver, or background component.
 - **Portable ZIP.** A no-installer option for users who prefer to run the app
   from a folder.
 - **Build provenance.** Releases are built by GitHub Actions from the tagged
@@ -53,8 +54,9 @@ gh attestation verify .\Echo-Music-Windows-x64-v1.4.5.msi `
 
 ## Upgrading from v1.4.4
 
-The MSI keeps the same upgrade UUID and preserves local data in
-`%USERPROFILE%\.echo-music`. If the old EXE build does not upgrade in place,
+The MSI keeps the same upgrade UUID and install scope as v1.4.4, so it replaces
+the old version in place and preserves local data in `%USERPROFILE%\.echo-music`.
+If Windows Installer reports a pending reboot or a partially removed old build,
 uninstall **Echo Music** from Apps & Features first, then install the MSI.
 
 ## Build from source

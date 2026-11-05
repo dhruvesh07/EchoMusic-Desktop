@@ -25,9 +25,9 @@ Analysis notes for the vendor:
 - The MSI payload contains the Compose app JARs, a Temurin 17 runtime, the
   Skiko native DLL, icons, and standard VC runtime/API-set DLLs. There is no
   bundled `ffmpeg.exe` or other third-party executable.
-- The installer is per-user, creates Start Menu and desktop shortcuts and an
-  uninstall entry, and installs no service, driver, scheduled task, or autorun
-  entry.
+- The installer installs machine-wide to `Program Files` (same scope as
+  v1.4.4), creates Start Menu and desktop shortcuts and an uninstall entry,
+  and installs no service, driver, scheduled task, or autorun entry.
 - Source is public GPL-3.0 code. The build is reproducible from the tag.
 
 ## v1.4.5 — replacement release
@@ -35,12 +35,12 @@ Analysis notes for the vendor:
 | Field | Value |
 |---|---|
 | Filename | `Echo-Music-Windows-x64-v1.4.5.msi` |
-| SHA-256 | `ecd66e301b03a4cbecb8d185b2eb0110db7e87465e22b11a1c38b19d6aefb41b` |
+| SHA-256 | Published in `SHA256SUMS.txt` on the release page |
 | Authenticode | Not signed (unless the release workflow signing secret is set) |
 | Packaging | Plain MSI, no self-extracting wrapper |
-| Portable alternative | `Echo-Music-Windows-x64-v1.4.5-portable.zip` (`7dd31669a828803fc78838ebb2c5cdcb114768a479a85886fdf461c849a2e38b`) |
+| Portable alternative | `Echo-Music-Windows-x64-v1.4.5-portable.zip` (hash in `SHA256SUMS.txt`) |
 | Microsoft Defender | No threats found (full file scan) |
-| Build provenance | GitHub Actions run 42037143376, commit `8027e0d`, tag `v1.4.5` |
+| Build provenance | GitHub Actions, tag `v1.4.5` |
 
 ## Report template
 

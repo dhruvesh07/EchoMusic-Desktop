@@ -47,8 +47,9 @@ evidence of a specific malware family.
 - **The self-extracting `.exe` wrapper is gone.** Releases are now an MSI
   installed by the trusted Windows Installer service, plus an optional portable
   ZIP. There is no small PE stub with a large embedded payload.
-- **Per-user installation.** No administrator elevation, no machine-wide
-  changes, no service or driver.
+- **Standard machine-wide installation.** Installs to `Program Files` with the
+  same scope as v1.4.4, so it replaces the old version instead of installing
+  side-by-side. Requires administrator approval; no service or driver.
 - **Build provenance.** Every release is built by GitHub Actions from the tagged
   commit. The workflow is public at
   `.github/workflows/build-windows.yml`, and each artifact gets a GitHub
@@ -112,5 +113,5 @@ A ready-to-send report with the v1.4.4 hash and analysis is in
 - **ffmpeg:** audio/video decoding executes an `ffmpeg` binary that **you**
   install. It is deliberately not bundled. Lookup order is `ECHO_FFMPEG`,
   `FFMPEG_HOME`, next to the installed app, then `PATH`.
-- **Installer:** per-user MSI, Start Menu and desktop shortcuts, and an
+- **Installer:** machine-wide MSI, Start Menu and desktop shortcuts, and an
   uninstall entry. No service, driver, scheduled task, or autorun entry.
