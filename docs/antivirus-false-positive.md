@@ -35,10 +35,12 @@ Analysis notes for the vendor:
 | Field | Value |
 |---|---|
 | Filename | `Echo-Music-Windows-x64-v1.4.5.msi` |
-| SHA-256 | Published in `SHA256SUMS.txt` on the release page |
+| SHA-256 | `ecd66e301b03a4cbecb8d185b2eb0110db7e87465e22b11a1c38b19d6aefb41b` |
 | Authenticode | Not signed (unless the release workflow signing secret is set) |
 | Packaging | Plain MSI, no self-extracting wrapper |
-| Portable alternative | `Echo-Music-Windows-x64-v1.4.5-portable.zip` |
+| Portable alternative | `Echo-Music-Windows-x64-v1.4.5-portable.zip` (`7dd31669a828803fc78838ebb2c5cdcb114768a479a85886fdf461c849a2e38b`) |
+| Microsoft Defender | No threats found (full file scan) |
+| Build provenance | GitHub Actions run 42037143376, commit `8027e0d`, tag `v1.4.5` |
 
 ## Report template
 
